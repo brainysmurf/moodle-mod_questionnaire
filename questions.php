@@ -623,5 +623,17 @@ if ($action == "confirmdelquestion" || $action == "confirmdelquestionparent") {
 
 } else {
     $questionsform->display();
+
+    echo "<script>
+$(document).on('ready', function(){
+    $('#id_type_id').prepend('<option></option>').val('');
+});
+$(document).on('submit', '#mform1', function(){
+    if (!$('#id_type_id').val()) {
+        alert('Please pick a type of question to add.');
+        return false;
+    }
+});
+    </script>";
 }
 echo $OUTPUT->footer();
