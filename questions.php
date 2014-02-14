@@ -628,7 +628,7 @@ if ($action == "confirmdelquestion" || $action == "confirmdelquestionparent") {
 $(document).on('ready', function(){
     $('#id_type_id').prepend('<option></option>').val('');
 });
-$(document).on('submit', '#mform1', function(){
+$(document).on('click', '#id_addqbutton', function(){
     if (!$('#id_type_id').val()) {
         alert('Please pick a type of question to add.');
         return false;
