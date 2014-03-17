@@ -568,13 +568,21 @@ if ($action == "confirmdelquestion" || $action == "confirmdelquestionparent") {
     if ($qtype != QUESSECTIONTEXT) {
         $sql = 'SELECT response_table FROM {questionnaire_question_type} WHERE typeid = '.$qtype;
         if ($resptable = $DB->get_record_sql($sql)) {
-            $sql = 'SELECT *
+            /*$sql = 'SELECT *
                 FROM {questionnaire_'.$resptable->response_table.'}
                 WHERE question_id ='.$qid.'
                 GROUP BY response_id';
             if ($resps = $DB->get_records_sql($sql) ) {
                 $countresps = count($resps);
+            }*/
+            $sql = 'SELECT COUNT(*) AS cnt
+                FROM {questionnaire_'.$resptable->response_table.'}
+                WHERE question_id ='.$qid.'
+                GROUP BY response_id';
+            if ($resps = $DB->get_record_sql($sql) ) {
+                $countresps = $resps->cnt ? $resps->cnt : 0;
             }
+
         }
     }
 
